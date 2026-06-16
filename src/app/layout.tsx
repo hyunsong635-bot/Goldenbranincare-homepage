@@ -22,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className={`${publicSans.variable}`}>
       <head>
+        <meta name="naver-site-verification" content="72147221cb35cccd73df5f42de4ce8a215bd9911" />
         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
