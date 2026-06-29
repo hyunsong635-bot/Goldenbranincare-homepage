@@ -24,6 +24,8 @@ export default function InquiryPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   const validate = () => {
     const e: Partial<FormData> = {};
@@ -35,19 +37,28 @@ export default function InquiryPage() {
     return e;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
       return;
     }
-    const subject = encodeURIComponent(`[도입문의] ${form.organization} - ${form.name}`);
-    const body = encodeURIComponent(
-      `이름: ${form.name}\n기관명: ${form.organization}\n연락처: ${form.phone}\n이메일: ${form.email}\n\n문의 내용:\n${form.message}`
-    );
-    window.location.href = `mailto:brain_care@naver.com?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+    setSending(true);
+    setSubmitError(false);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("failed");
+      setSubmitted(true);
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   const handleChange = (field: keyof FormData, value: string) => {
@@ -96,8 +107,8 @@ export default function InquiryPage() {
                     </div>
                     <h2 className="font-bold text-[24px] text-[#000c26]">문의가 접수되었습니다!</h2>
                     <p className="text-[16px] text-[#44474f] leading-[1.6]">
-                      이메일 앱이 열리지 않았다면<br />
-                      <strong>brain_care@naver.com</strong>으로 직접 연락해 주세요.
+                      담당자가 확인 후 빠르게 연락드리겠습니다.<br />
+                      급하신 경우 <strong>brain_care@naver.com</strong>으로 연락해 주세요.
                     </p>
                     <button
                       onClick={() => { setSubmitted(false); setForm({ name: "", organization: "", phone: "", email: "", message: "" }); }}
@@ -181,11 +192,17 @@ export default function InquiryPage() {
 
                     <button
                       type="submit"
-                      className="w-full font-semibold text-[18px] py-4 rounded-[12px] transition-opacity hover:opacity-90 mt-1"
+                      disabled={sending}
+                      className="w-full font-semibold text-[18px] py-4 rounded-[12px] transition-opacity hover:opacity-90 mt-1 disabled:opacity-60"
                       style={{ backgroundColor: "#fed65b", color: "#745c00" }}
                     >
-                      도입 문의하기
+                      {sending ? "전송 중..." : "도입 문의하기"}
                     </button>
+                    {submitError && (
+                      <p className="text-red-400 text-[14px] text-center">
+                        전송에 실패했습니다. 잠시 후 다시 시도하거나 brain_care@naver.com으로 연락해 주세요.
+                      </p>
+                    )}
                   </form>
                 )}
               </div>

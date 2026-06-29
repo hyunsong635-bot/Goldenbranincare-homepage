@@ -6,12 +6,30 @@ import { useState } from "react";
 
 export default function CTASection() {
   const [form, setForm] = useState({ name: "", organization: "", phone: "", email: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      setStatus("error");
+      return;
+    }
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("failed");
+      setStatus("success");
+      setForm({ name: "", organization: "", phone: "", email: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -98,10 +116,20 @@ export default function CTASection() {
                     className="bg-transparent text-[14px] lg:text-[16px] text-[#44474f] placeholder:text-[#6b7280] outline-none w-full resize-none p-[16px] min-h-[120px] lg:min-h-[140px] leading-[24px]" />
                 </div>
               </div>
-              <button type="submit"
-                className="bg-[#fed65b] text-[#745c00] font-semibold text-[15px] lg:text-[18px] py-[14px] lg:py-[16px] rounded-[12px] w-full hover:bg-[#fdc93a] transition-colors">
-                도입 문의하기
+              <button type="submit" disabled={status === "sending"}
+                className="bg-[#fed65b] text-[#745c00] font-semibold text-[15px] lg:text-[18px] py-[14px] lg:py-[16px] rounded-[12px] w-full hover:bg-[#fdc93a] transition-colors disabled:opacity-60">
+                {status === "sending" ? "전송 중..." : "도입 문의하기"}
               </button>
+              {status === "success" && (
+                <p className="text-[14px] text-[#15803d] text-center w-full">
+                  문의가 정상적으로 접수되었습니다. 감사합니다!
+                </p>
+              )}
+              {status === "error" && (
+                <p className="text-[14px] text-red-500 text-center w-full">
+                  필수 항목(이름·이메일·문의 내용)을 확인해 주세요. 문제가 계속되면 brain_care@naver.com으로 연락 바랍니다.
+                </p>
+              )}
             </form>
           </motion.div>
         </div>
