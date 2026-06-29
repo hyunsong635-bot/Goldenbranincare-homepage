@@ -211,14 +211,6 @@ export default function BrainFriendsPage() {
                     >
                       도입 문의하기
                     </Link>
-                    <a
-                      href="/제품소개서.pdf"
-                      download="골든브레인케어_제품소개서.pdf"
-                      className="font-semibold text-[15px] lg:text-[16px] px-[42px] py-[18px] rounded-full border-2 bg-white inline-flex items-center justify-center"
-                      style={{ color: "#f96a7c", borderColor: "#f96a7c" }}
-                    >
-                      소개서 다운로드
-                    </a>
                   </div>
                 </FadeInUp>
               </div>
@@ -792,13 +784,6 @@ export default function BrainFriendsPage() {
                 >
                   도입 문의하기
                 </Link>
-                <a
-                  href="/제품소개서.pdf"
-                  download="골든브레인케어_제품소개서.pdf"
-                  className="bg-white font-semibold text-[15px] lg:text-[16px] px-8 py-[18px] rounded-full border-2 border-[#1b1c1c] text-[#1b1c1c] inline-block"
-                >
-                  제품소개서 다운로드
-                </a>
               </div>
             </FadeInUp>
           </div>

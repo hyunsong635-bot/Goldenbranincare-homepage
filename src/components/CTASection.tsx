@@ -44,13 +44,6 @@ export default function CTASection() {
               >
                 상담 신청하기
               </Link>
-              <a
-                href="/제품소개서.pdf"
-                download="골든브레인케어_제품소개서.pdf"
-                className="bg-[#fed65b] text-[#745c00] font-semibold text-[14px] lg:text-[18px] px-6 py-3 lg:px-[32px] lg:py-[16px] rounded-[12px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1),0px_4px_6px_-4px_rgba(0,0,0,0.1)] hover:bg-[#fdc93a] transition-colors whitespace-nowrap inline-block"
-              >
-                제품소개서 다운로드
-              </a>
             </div>
           </motion.div>
 
