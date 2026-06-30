@@ -47,7 +47,7 @@ export default function HeroSection() {
               className="flex flex-wrap gap-3 items-center pt-2 lg:pt-[16px]"
             >
               <Link
-                href="/brain-friends"
+                href="/brand#brainfriends"
                 className="bg-[#fed65b] text-[#745c00] font-semibold text-[14px] lg:text-[16px] tracking-[0.32px] px-6 py-3.5 lg:px-[32px] lg:py-[18px] rounded-[12px] shadow-[0px_4px_6px_-1px_rgba(0,0,0,0.1),0px_2px_4px_-2px_rgba(0,0,0,0.1)] hover:bg-[#fdc93a] transition-colors whitespace-nowrap"
               >
                 브레인 프렌즈 알아보기

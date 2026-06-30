@@ -6,6 +6,9 @@ import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FadeInUp from "@/components/animations/FadeInUp";
+import HeroSlideshow from "@/components/HeroSlideshow";
+
+const gradientPink = "linear-gradient(135deg, #f5ab9b 0%, #f96a7c 100%)";
 
 const values = [
   {
@@ -226,23 +229,45 @@ export default function BrandPage() {
           </div>
         </section>
 
-        {/* ── Product Teaser ── */}
-        <section className="w-full bg-[#000c26]">
+        {/* ── Product Teaser (브레인프렌즈) ── */}
+        <section id="brainfriends" className="w-full bg-[#000c26] scroll-mt-[88px] lg:scroll-mt-[120px]">
           <div className="max-w-[1280px] mx-auto px-5 md:px-10 lg:px-[80px] py-14 lg:py-[96px]">
-            <FadeInUp className="text-center mb-12 lg:mb-[64px]">
-              <p className="font-semibold text-[13px] text-[#fed65b] uppercase tracking-[2px] mb-3">
-                Our Product
-              </p>
-              <h2 className="font-bold text-[24px] lg:text-[36px] text-white leading-[1.4]">
-                브레인프렌즈
-              </h2>
-              <p className="font-medium text-[15px] lg:text-[18px] text-[rgba(255,255,255,0.65)] leading-[1.8] mt-4 max-w-[600px] mx-auto">
-                자가진단부터 반복 훈련까지,<br />
-                일상 속 디지털 언어재활 솔루션
-              </p>
-            </FadeInUp>
+            {/* 브레인프렌즈 히어로 */}
+            <div className="flex flex-col gap-8 lg:grid lg:grid-cols-2 lg:gap-x-[60px] lg:items-center mb-12 lg:mb-[72px]">
+              <FadeInUp>
+                <p className="font-semibold text-[13px] text-[#fed65b] uppercase tracking-[2px] mb-4">
+                  Our Product
+                </p>
+                <p className="font-bold text-[13px] lg:text-[14px] text-[#f5ab9b] mb-3">
+                  뇌질환 환자 대상 의사소통장애 재활·언어재활
+                </p>
+                <span
+                  className="inline-block font-semibold text-[13px] lg:text-[14px] px-4 py-1.5 rounded-full mb-6"
+                  style={{ color: "#fde4dd", backgroundColor: "rgba(249,106,124,0.18)" }}
+                >
+                  디지털의료제품(DTx)
+                </span>
+                <h2 className="font-bold text-[28px] sm:text-[36px] lg:text-[48px] text-white leading-[1.25] tracking-[-0.96px] mb-8">
+                  일상의 대화를 되찾아주는<br />
+                  <span className="bg-clip-text text-transparent" style={{ backgroundImage: gradientPink }}>
+                    브레인프렌즈
+                  </span>
+                </h2>
+                <Link
+                  href="/inquiry"
+                  className="text-white font-semibold text-[15px] lg:text-[16px] px-8 py-[18px] rounded-full shadow-[0px_20px_25px_-5px_rgba(245,171,155,0.3)] inline-flex items-center justify-center"
+                  style={{ backgroundImage: gradientPink }}
+                >
+                  도입 문의하기
+                </Link>
+              </FadeInUp>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 mb-10 lg:mb-[56px]">
+              <FadeInUp delay={0.2} className="w-full max-w-[520px] mx-auto lg:mx-0 lg:max-w-none">
+                <HeroSlideshow />
+              </FadeInUp>
+            </div>
+
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
               {[
                 { icon: "/images/icon-selftest.svg", label: "자가점검", sub: "Self Assessment" },
                 { icon: "/images/icon-speech.svg", label: "언어 재활", sub: "Speech Rehab" },
@@ -262,15 +287,6 @@ export default function BrandPage() {
                 </FadeInUp>
               ))}
             </div>
-
-            <FadeInUp className="flex justify-center">
-              <Link
-                href="/brain-friends"
-                className="bg-[#fed65b] text-[#745c00] font-bold text-[15px] lg:text-[18px] px-8 py-4 lg:px-[40px] lg:py-[18px] rounded-[12px] inline-block hover:bg-[#fdc93a] transition-colors"
-              >
-                브레인프렌즈 자세히 보기
-              </Link>
-            </FadeInUp>
           </div>
         </section>
 

@@ -8,11 +8,12 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const navLinks = [
   { label: "브랜드 소개", href: "/brand" },
-  { label: "브레인프렌즈", href: "/brain-friends" },
-  { label: "핵심 기능", href: "/features" },
+  { label: "브레인프렌즈", href: "/brand#brainfriends" },
   { label: "기관 도입", href: "/institution" },
   { label: "문의", href: "/contact" },
 ];
+
+const therapistReservationUrl = "https://braintalktalk.goldenbraincare.com/";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -51,22 +52,22 @@ export default function Header() {
               );
             })}
           </div>
-          <Link
-            href="/inquiry"
+          <a
+            href={therapistReservationUrl}
             className="text-white font-bold text-[16px] tracking-[0.32px] px-[24px] py-[10px] rounded-[12px] whitespace-nowrap bg-[linear-gradient(135deg,#fac06c_0%,#f09b79_100%)]"
           >
-            도입 문의하기
-          </Link>
+            재활사 예약
+          </a>
         </nav>
 
         {/* Mobile: CTA + hamburger */}
         <div className="flex lg:hidden items-center gap-3">
-          <Link
-            href="/inquiry"
+          <a
+            href={therapistReservationUrl}
             className="text-white font-bold text-[13px] px-3.5 py-2 rounded-[12px] whitespace-nowrap bg-[linear-gradient(135deg,#fac06c_0%,#f09b79_100%)]"
           >
-            도입 문의
-          </Link>
+            재활사 예약
+          </a>
           <button
             onClick={() => setOpen(!open)}
             className="flex flex-col gap-[5px] w-8 h-8 items-center justify-center flex-shrink-0"

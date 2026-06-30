@@ -6,8 +6,7 @@ import { useState } from "react";
 
 const menuLinks = [
   { label: "브랜드 소개", href: "/brand" },
-  { label: "브레인 프렌즈", href: "/brain-friends" },
-  { label: "핵심 기능", href: "/features" },
+  { label: "브레인 프렌즈", href: "/brand#brainfriends" },
 ];
 
 export default function Footer() {
